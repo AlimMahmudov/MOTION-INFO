@@ -39,6 +39,13 @@ const Directory = () => {
       green: "green",
     },
   ];
+  const react = [
+    {
+      state: "useState",
+      effect: "useEffect",
+      context: "useContext",
+    },
+  ];
 
   const router = useRouter();
 
@@ -50,6 +57,8 @@ const Directory = () => {
         return css;
       case "JavaScript":
         return js;
+      case "React":
+        return react;
       default:
         return [];
     }
