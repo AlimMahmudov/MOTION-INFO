@@ -36,6 +36,7 @@ const Directory = () => {
       red: "red",
       blue: "blue",
       yellow: "yellow",
+      green: "green",
     },
   ];
 
