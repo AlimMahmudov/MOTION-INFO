@@ -1,0 +1,49 @@
+#Directory {
+  padding-top: 10px;
+  font-family: sans-serif;
+  .directory {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+
+    .directory_text {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      h1 {
+        font-size: 36px;
+      }
+      p {
+        font-size: 20px;
+        width: 500px;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      button {
+        background: none;
+        color: #ffffff;
+        border-radius: 5px;
+        font-weight: 500;
+        line-height: 19.5px;
+        text-align: center;
+        padding: 10px 40px;
+        transition: all 0.3s;
+        border: solid 2px #034078;
+      }
+      button:hover {
+        background: #0455a0;
+        transform: scale(1.05);
+        transition: all 0.3s;
+      }
+    }
+  }
+}

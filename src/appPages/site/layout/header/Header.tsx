@@ -13,7 +13,7 @@ const Header = () => {
           />
           <div className={scss.a_tegs}>
             <Link href="/">Home</Link>
-            <Link href="/directory">справочник</Link>
+            <Link href="directory">справочник</Link>
             <Link href="/">тест</Link>
             <Link href="/">библиотеки</Link>
           </div>
