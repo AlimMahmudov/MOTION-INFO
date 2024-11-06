@@ -17,7 +17,7 @@ const Header = () => {
             <Link href="/">тест</Link>
             <Link href="/">библиотеки</Link>
           </div>
-          <button>войтиы</button>
+          <button>войти</button>
         </div>
       </div>
     </header>
