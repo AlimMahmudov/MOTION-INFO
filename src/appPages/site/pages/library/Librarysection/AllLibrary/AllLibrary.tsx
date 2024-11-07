@@ -2,6 +2,7 @@
 import React from "react";
 import scss from "./AllLibrary.module.scss";
 import { useLibraryStore, PackageManager } from "@/stores/UseCodeStore";
+import { useSearchStore } from "@/stores/useSearchStore";
 
 const libraryData = [
   {
@@ -22,16 +23,11 @@ const libraryData = [
     description: "Angular is a platform...",
     link: "https://angular.io/",
   },
-  // Add more libraries as needed
 ];
 
 const AllLibrary = () => {
-  const {
-    selectedPackageManager,
-    selectedLibrary,
-    setPackageManager,
-    setLibrary,
-  } = useLibraryStore();
+  const { selectedPackageManager, selectedLibrary, setPackageManager, setLibrary } = useLibraryStore();
+  const { searchQuery } = useSearchStore(); // Get search query from Zustand
 
   const codeSnippets: { [key: string]: { [key in PackageManager]: string } } = {
     React: {
@@ -51,37 +47,53 @@ const AllLibrary = () => {
     },
   };
 
+  // Filter libraries based on the search query from Zustand store
+  const filteredLibraries = libraryData.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <section className={scss.AllLibrary}>
       <div className="container">
         <div className={scss.content}>
-          <div className={scss.buttons}>
-            <select
-              onChange={(e) =>
-                setPackageManager(e.target.value as PackageManager)
-              }
-              value={selectedPackageManager}
-            >
-              <option value="npm">npm</option>
-              <option value="pnpm">pnpm</option>
-              <option value="yarn">yarn</option>
-            </select>
-          </div>
           <div className={scss.codeSnippet}>
-            <p>Код для копирования:</p>
+            <div className={scss.buttons}>
+              <div className={scss.selectMen}>
+                <button
+                  className={selectedPackageManager === "npm" ? scss.active : ""}
+                  onClick={() => setPackageManager("npm")}
+                >
+                  npm
+                </button>
+                <button
+                  className={selectedPackageManager === "pnpm" ? scss.active : ""}
+                  onClick={() => setPackageManager("pnpm")}
+                >
+                  pnpm
+                </button>
+                <button
+                  className={selectedPackageManager === "yarn" ? scss.active : ""}
+                  onClick={() => setPackageManager("yarn")}
+                >
+                  yarn
+                </button>
+              </div>
+              <div className={scss.copy}>
+                <button
+                  onClick={() =>
+                    navigator.clipboard.writeText(
+                      codeSnippets[selectedLibrary][selectedPackageManager]
+                    )
+                  }
+                >
+                  Копировать
+                </button>
+              </div>
+            </div>
             <pre>{codeSnippets[selectedLibrary][selectedPackageManager]}</pre>
-            <button
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  codeSnippets[selectedLibrary][selectedPackageManager]
-                )
-              }
-            >
-              Копировать
-            </button>
           </div>
           <div className={scss.cards}>
-            {libraryData.map((item) => (
+            {filteredLibraries.map((item) => (
               <div
                 key={item.id}
                 className={scss.card}

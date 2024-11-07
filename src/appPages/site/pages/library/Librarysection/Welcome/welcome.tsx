@@ -1,6 +1,19 @@
+"use client";
 import React from "react";
 import scss from "./Welcome.module.scss";
+import { useSearchStore } from "@/stores/useSearchStore";
+
 const Welcome = () => {
+  const { searchQuery, setSearchQuery } = useSearchStore();
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    console.log("Search query: ", searchQuery);
+  };
+
   return (
     <section className={scss.Welcome}>
       <div className="container">
@@ -11,8 +24,13 @@ const Welcome = () => {
             которая подходит для вашего проекта.
           </p>
           <div className={scss.search}>
-            <input type="text" placeholder="Поиск по библиотекам" />
-            <button>Найти</button>
+            <input
+              type="text"
+              placeholder="Поиск по библиотекам"
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+            <button onClick={handleSearchSubmit}>Найти</button>
           </div>
           <div className={scss.install}>
             <h2>Установка</h2>
@@ -20,7 +38,6 @@ const Welcome = () => {
               Вы можете установить любую библиотеку или фреймворк с помощью npm
               или yarn.
             </p>
-           
           </div>
         </div>
       </div>
