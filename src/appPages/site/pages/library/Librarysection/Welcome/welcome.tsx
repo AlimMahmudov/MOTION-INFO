@@ -15,7 +15,7 @@ const Welcome = () => {
   };
 
   return (
-    <section className={scss.Welcome}>
+    <section id="welcome" className={scss.Welcome}>
       <div className="container">
         <div className={scss.content}>
           <h1>Найди и используй любую библиотеку или фреймворк</h1>
@@ -23,15 +23,7 @@ const Welcome = () => {
             Мы поможем вам найти и использовать любую библиотеку или фреймворк,
             которая подходит для вашего проекта.
           </p>
-          <div className={scss.search}>
-            <input
-              type="text"
-              placeholder="Поиск по библиотекам"
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
-            <button onClick={handleSearchSubmit}>Найти</button>
-          </div>
+          
           <div className={scss.install}>
             <h2>Установка</h2>
             <p>
